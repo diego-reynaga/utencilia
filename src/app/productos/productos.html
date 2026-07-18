@@ -1,0 +1,125 @@
+<!-- Productos destacados y filtro -->
+<section class="section-pad products">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div>
+        <span class="section-kicker">Selección Utensilia</span>
+        <h2>Productos que hacen la <em>diferencia</em></h2>
+      </div>
+      <p>Referencias populares para comenzar a equipar tu cocina, hogar o negocio.</p>
+    </div>
+
+    <div class="filter-bar reveal" role="group" aria-label="Filtrar productos por categoría">
+      <button class="filter-button" [class.active]="activeFilter === 'todos'" type="button" (click)="filterProducts('todos')">Todos</button>
+      <button class="filter-button" [class.active]="activeFilter === 'cocina'" type="button" (click)="filterProducts('cocina')">Cocina</button>
+      <button class="filter-button" [class.active]="activeFilter === 'mesa'" type="button" (click)="filterProducts('mesa')">Mesa</button>
+      <button class="filter-button" [class.active]="activeFilter === 'cubiertos'" type="button" (click)="filterProducts('cubiertos')">Cubiertos</button>
+      <button class="filter-button" [class.active]="activeFilter === 'organizacion'" type="button" (click)="filterProducts('organizacion')">Organización</button>
+      <button class="filter-button" [class.active]="activeFilter === 'restaurante'" type="button" (click)="filterProducts('restaurante')">Restaurantes</button>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+      <article class="product-card reveal" [class.hidden]="!isVisible('cocina')" [class.visible]="true">
+        <div class="product-visual visual-coral">
+          <span class="product-tag">Más vendido</span>
+          <div class="product-shape pot-shape"><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Cocina</span><span class="product-rating">★ 4.9</span></div>
+          <h3>Olla de acero con tapa</h3>
+          <p>Resistente, práctica y perfecta para el uso diario.</p>
+          <div class="product-bottom"><strong>S/ 89.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20la%20olla%20de%20acero" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('cocina')" [class.visible]="true">
+        <div class="product-visual visual-sage">
+          <span class="product-tag">Nuevo</span>
+          <div class="product-shape pan-shape"><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Cocina</span><span class="product-rating">★ 4.8</span></div>
+          <h3>Sartén antiadherente</h3>
+          <p>Cocción uniforme con mango cómodo y seguro.</p>
+          <div class="product-bottom"><strong>S/ 49.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20la%20sartén%20antiadherente" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('mesa')" [class.visible]="true">
+        <div class="product-visual visual-sand">
+          <div class="product-shape plate-shape"><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Mesa</span><span class="product-rating">★ 4.9</span></div>
+          <h3>Set de platos x12</h3>
+          <p>Diseño neutro y elegante para toda ocasión.</p>
+          <div class="product-bottom"><strong>S/ 74.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20el%20set%20de%20platos" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('mesa')" [class.visible]="true">
+        <div class="product-visual visual-blue">
+          <span class="product-tag">Pack ahorro</span>
+          <div class="product-shape glass-shape"><span></span><span></span><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Mesa</span><span class="product-rating">★ 4.7</span></div>
+          <h3>Vasos de vidrio x6</h3>
+          <p>Clásicos, firmes y fáciles de combinar.</p>
+          <div class="product-bottom"><strong>S/ 29.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20los%20vasos%20de%20vidrio" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('cubiertos')" [class.visible]="true">
+        <div class="product-visual visual-gray">
+          <div class="product-shape cutlery-shape"><span></span><span></span><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Cubiertos</span><span class="product-rating">★ 4.8</span></div>
+          <h3>Juego de cubiertos x24</h3>
+          <p>Acabado pulido para una mesa bien presentada.</p>
+          <div class="product-bottom"><strong>S/ 69.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20el%20juego%20de%20cubiertos" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('cocina')" [class.visible]="true">
+        <div class="product-visual visual-yellow">
+          <div class="product-shape utensil-shape"><span></span><span></span><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Cocina</span><span class="product-rating">★ 4.9</span></div>
+          <h3>Kit de utensilios x7</h3>
+          <p>Las herramientas esenciales siempre a la mano.</p>
+          <div class="product-bottom"><strong>S/ 39.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20el%20kit%20de%20utensilios" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('organizacion')" [class.visible]="true">
+        <div class="product-visual visual-lilac">
+          <span class="product-tag">Práctico</span>
+          <div class="product-shape containers-shape"><span></span><span></span><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Organización</span><span class="product-rating">★ 4.7</span></div>
+          <h3>Contenedores herméticos</h3>
+          <p>Ordena y conserva tus alimentos por más tiempo.</p>
+          <div class="product-bottom"><strong>S/ 44.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20los%20contenedores" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+
+      <article class="product-card reveal" [class.hidden]="!isVisible('restaurante')" [class.visible]="true">
+        <div class="product-visual visual-ink">
+          <span class="product-tag tag-light">Negocios</span>
+          <div class="product-shape tray-shape"><span></span></div>
+        </div>
+        <div class="product-info">
+          <div><span class="product-category">Restaurante</span><span class="product-rating">★ 4.9</span></div>
+          <h3>Bandeja de servicio</h3>
+          <p>Amplia, firme y lista para el trabajo continuo.</p>
+          <div class="product-bottom"><strong>S/ 34.90 <small>referencial</small></strong><a href="https://wa.me/51999999999?text=Hola,%20deseo%20consultar%20por%20la%20bandeja%20de%20servicio" target="_blank" rel="noopener">Consultar <svg><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </article>
+    </div>
+    <p class="filter-empty" [style.display]="visibleCount === 0 ? 'block' : 'none'">No hay productos en esta categoría por ahora.</p>
+  </div>
+</section>

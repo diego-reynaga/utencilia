@@ -1,0 +1,63 @@
+<!-- Categorías -->
+<section class="section-pad categories">
+  <div class="container">
+    <div class="section-heading centered reveal">
+      <span class="section-kicker">Explora por categoría</span>
+      <h2>Encuentra justo lo que <em>estás buscando</em></h2>
+      <p>Una selección pensada para ayudarte a cocinar, servir y organizar mejor.</p>
+    </div>
+
+    <div class="category-grid">
+      <a class="category-card category-large reveal" routerLink="/productos" [queryParams]="{filter: 'cocina'}">
+        <div class="category-copy">
+          <span>Esenciales para cocinar</span>
+          <h3>Ollas y sartenes</h3>
+          <p>Diseñadas para acompañarte todos los días.</p>
+          <span class="circle-link"><svg><use href="#icon-arrow"></use></svg></span>
+        </div>
+        <div class="category-art cookware-art">
+          <span class="art-pan"></span>
+          <span class="art-pot"></span>
+        </div>
+      </a>
+
+      <a class="category-card reveal" routerLink="/productos" [queryParams]="{filter: 'mesa'}">
+        <div class="category-icon"><svg><use href="#icon-glass"></use></svg></div>
+        <span>Para servir mejor</span>
+        <h3>Platos y vasos</h3>
+        <span class="text-link">Ver productos <svg><use href="#icon-arrow"></use></svg></span>
+      </a>
+
+      <a class="category-card reveal" routerLink="/productos" [queryParams]="{filter: 'cubiertos'}">
+        <div class="category-icon"><svg><use href="#icon-cutlery"></use></svg></div>
+        <span>Detalles de mesa</span>
+        <h3>Cubiertos</h3>
+        <span class="text-link">Ver productos <svg><use href="#icon-arrow"></use></svg></span>
+      </a>
+
+      <a class="category-card reveal" routerLink="/productos" [queryParams]="{filter: 'cocina'}">
+        <div class="category-icon"><svg><use href="#icon-utensil"></use></svg></div>
+        <span>Prácticos y versátiles</span>
+        <h3>Utensilios de cocina</h3>
+        <span class="text-link">Ver productos <svg><use href="#icon-arrow"></use></svg></span>
+      </a>
+
+      <a class="category-card reveal" routerLink="/productos" [queryParams]="{filter: 'organizacion'}">
+        <div class="category-icon"><svg><use href="#icon-clean"></use></svg></div>
+        <span>Espacios en orden</span>
+        <h3>Limpieza y organización</h3>
+        <span class="text-link">Ver productos <svg><use href="#icon-arrow"></use></svg></span>
+      </a>
+
+      <a class="category-card category-wide reveal" routerLink="/productos" [queryParams]="{filter: 'restaurante'}">
+        <div>
+          <span>Soluciones por volumen</span>
+          <h3>Línea para restaurantes</h3>
+          <p>Equipa tu operación con opciones funcionales, resistentes y convenientes.</p>
+        </div>
+        <span class="category-button">Cotizar línea <svg><use href="#icon-arrow"></use></svg></span>
+        <div class="wide-art"><svg><use href="#icon-building"></use></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
