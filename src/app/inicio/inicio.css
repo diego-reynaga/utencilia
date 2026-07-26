@@ -1,0 +1,126 @@
+/* ========================================
+   SECCIÓN UBICACIÓN
+   ======================================== */
+
+.location-section {
+  background: var(--surface-alt, #f7f4ee);
+}
+
+.location-card {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+  margin-top: 2.5rem;
+  min-height: 420px;
+}
+
+/* Panel lateral de información */
+.location-info {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  color: #fff;
+}
+
+.location-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.location-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.location-icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.2rem;
+}
+
+.location-detail p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.location-info .button-primary {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.location-info .button-primary svg {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Mapa embed */
+.location-map {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.location-map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .location-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .location-info {
+    padding: 2rem 1.5rem;
+  }
+
+  .location-map {
+    min-height: 280px;
+  }
+}
