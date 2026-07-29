@@ -1,126 +1,351 @@
-/* ========================================
-   SECCIÓN UBICACIÓN
-   ======================================== */
+/* ==================================================
+   INICIO — color y contraste sobre el fondo único
+   El sitio comparte un solo fondo (--pv-fondo) y allí
+   todas las superficies quedaron en el mismo 5 % de
+   crema: la portada perdía sus acentos y la ilustración
+   del héroe quedaba verde sobre verde. Aquí se
+   devuelven los cálidos, sin tocar las otras rutas.
+   ================================================== */
 
-.location-section {
-  background: var(--surface-alt, #f7f4ee);
+:host {
+  --i-crema: #f8f5ef;
+  --i-coral: #ff8a6b;
+  --i-coral-hondo: #b03a22;
+  --i-ambar: #f5c96a;
+  --i-menta: #9ed7b6;
+  --i-tinta: #14302a;
+  /* Sube el texto secundario heredado a un contraste legible. */
+  --pv-suave: rgba(248, 245, 239, 0.72);
+  display: block;
 }
 
-.location-card {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 2rem;
-  background: #fff;
-  border-radius: 1.5rem;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
-  margin-top: 2.5rem;
-  min-height: 420px;
+/* ==================================================
+   HÉROE — atmósfera
+   ================================================== */
+
+.hero {
+  background:
+    radial-gradient(1080px 620px at 76% 4%, rgba(255, 138, 107, 0.13), transparent 62%),
+    radial-gradient(780px 540px at 2% 24%, rgba(158, 215, 182, 0.09), transparent 60%);
 }
 
-/* Panel lateral de información */
-.location-info {
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-  color: #fff;
+/* La trama de puntos estaba en el color del propio fondo. */
+.hero::before {
+  background-image: radial-gradient(rgba(248, 245, 239, 0.16) 1px, transparent 1px);
+  opacity: 0.6;
 }
 
-.location-detail {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+.hero-glow {
+  filter: blur(90px);
+  opacity: 0.5;
 }
 
-.location-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 0.75rem;
-  flex-shrink: 0;
-  backdrop-filter: blur(8px);
+.hero-glow-one {
+  background: #3f8f6d;
+}
+
+.hero-glow-two {
+  background: #d9633f;
+}
+
+/* ==================================================
+   HÉROE — texto
+   ================================================== */
+
+.eyebrow {
+  background: rgba(255, 138, 107, 0.13);
+  border-color: rgba(255, 138, 107, 0.34);
+  color: var(--i-coral);
+}
+
+/* El degradado va antes del recorte: la forma corta
+   `background` reiniciaría background-clip a border-box. */
+.hero h1 em {
+  background: linear-gradient(96deg, var(--i-coral) 10%, var(--i-ambar) 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-text {
+  color: rgba(248, 245, 239, 0.74);
+}
+
+.hero-actions .button-primary {
+  background: linear-gradient(135deg, #ff8f70, #e35b3c);
+  box-shadow: 0 16px 34px rgba(201, 69, 44, 0.34);
+  color: #ffffff;
+}
+
+.hero-actions .button-primary:hover {
+  background: linear-gradient(135deg, #ffa084, #ea6a4a);
+  box-shadow: 0 20px 42px rgba(201, 69, 44, 0.42);
+}
+
+.hero-actions .button-secondary {
+  background: rgba(248, 245, 239, 0.06);
+  border-color: rgba(248, 245, 239, 0.24);
+  color: var(--i-crema);
+}
+
+.hero-actions .button-secondary:hover {
+  background: rgba(248, 245, 239, 0.13);
+  border-color: rgba(248, 245, 239, 0.4);
+  box-shadow: none;
+}
+
+.trust-avatars span {
+  border-color: var(--pv-fondo);
+  color: var(--i-tinta);
+}
+
+.trust-avatars span:first-child {
+  background: var(--i-menta);
+}
+
+.trust-avatars span:nth-child(2) {
+  background: var(--i-ambar);
+}
+
+.trust-avatars span:nth-child(3) {
+  background: var(--i-coral);
+}
+
+.hero-trust p {
+  color: rgba(248, 245, 239, 0.68);
+}
+
+.hero-trust strong {
+  color: var(--i-crema);
+}
+
+/* ==================================================
+   HÉROE — tarjeta ilustrada
+   La escena (sartén, tapa, cuchara) está dibujada con
+   tonos oscuros y de madera: necesita una superficie
+   clara debajo, no el 5 % de crema del tema oscuro.
+   ================================================== */
+
+.hero-card-main {
+  background: linear-gradient(158deg, #f6f1e6 0%, #e2ecdf 46%, #b9d1bf 100%);
+  border: 8px solid rgba(248, 245, 239, 0.16);
+  box-shadow: 0 45px 90px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(248, 245, 239, 0.07);
+}
+
+.product-scene::before {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.pot-lid {
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.visual-caption {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: var(--i-tinta);
+}
+
+.caption-label {
+  color: var(--i-coral-hondo);
+}
+
+.visual-caption strong {
+  color: var(--i-tinta);
+}
+
+.visual-caption > span:last-child {
+  color: rgba(20, 48, 42, 0.64);
+}
+
+.hero-badge {
+  background: linear-gradient(140deg, #ff8f70, #e0563a);
+  border: 7px solid var(--pv-fondo);
+  box-shadow: 0 14px 30px rgba(201, 69, 44, 0.35);
+  color: #ffffff;
+}
+
+/* Las órbitas se trazaban con el color del fondo. */
+.visual-orbit {
+  border-color: rgba(248, 245, 239, 0.16);
+}
+
+.floating-card {
+  background: rgba(17, 40, 35, 0.82);
+  border: 1px solid rgba(248, 245, 239, 0.14);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  color: var(--i-crema);
+}
+
+.floating-card small {
+  color: rgba(248, 245, 239, 0.62);
+}
+
+.floating-card-one .floating-icon {
+  background: rgba(158, 215, 182, 0.18);
+  border-color: rgba(158, 215, 182, 0.32);
+  color: var(--i-menta);
+}
+
+.floating-card-two .floating-icon {
+  background: rgba(245, 201, 106, 0.18);
+  border-color: rgba(245, 201, 106, 0.32);
+  color: var(--i-ambar);
+}
+
+/* ==================================================
+   FRANJA DE CONFIANZA
+   Era una superficie translúcida sobre el mismo fondo:
+   no se distinguía del resto de la página.
+   ================================================== */
+
+.trust-strip {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 138, 107, 0.16),
+    rgba(245, 201, 106, 0.12) 48%,
+    rgba(158, 215, 182, 0.14)
+  );
+  border-block: 1px solid rgba(248, 245, 239, 0.12);
+  border-inline: 0;
+}
+
+.trust-strip span {
+  color: rgba(248, 245, 239, 0.88);
+}
+
+.trust-strip svg {
+  stroke: var(--i-ambar);
+}
+
+/* ==================================================
+   GALERÍA — las cuatro piezas vuelven a tener color
+   ================================================== */
+
+.gallery-section {
+  background: radial-gradient(920px 540px at 88% 2%, rgba(158, 215, 182, 0.07), transparent 62%);
+}
+
+.gallery-section .section-kicker {
+  color: var(--i-coral);
+}
+
+.gallery-section h2 em {
+  color: var(--i-ambar);
+}
+
+.gallery-section .section-heading p {
+  color: rgba(248, 245, 239, 0.7);
+}
+
+.gallery-item {
+  transition: transform var(--transition), background var(--transition), border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.gallery-item:hover {
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.34);
+}
+
+.gallery-dark {
+  background: linear-gradient(152deg, #1e433a 0%, #0e211d 100%);
+  border: 1px solid rgba(248, 245, 239, 0.1);
+  color: var(--i-crema);
+}
+
+.gallery-dark:hover {
+  background: linear-gradient(152deg, #255146 0%, #132b25 100%);
+  border-color: rgba(248, 245, 239, 0.2);
+}
+
+.gallery-light {
+  background: linear-gradient(152deg, #f2e8d6 0%, #d9c7a6 100%);
+  border: 1px solid rgba(248, 245, 239, 0.16);
+  color: var(--i-tinta);
+}
+
+.gallery-light:hover {
+  background: linear-gradient(152deg, #f7eee0 0%, #e0d0b1 100%);
+  border-color: rgba(248, 245, 239, 0.3);
+}
+
+/* El degradado arranca en #e0563a y no más claro: la cita
+   va en blanco y por encima perdería contraste. */
+.gallery-coral {
+  background: linear-gradient(152deg, #e0563a 0%, #b03a22 100%);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
 }
 
-.location-icon svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  stroke: #fff;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.gallery-coral:hover {
+  background: linear-gradient(152deg, #e86046 0%, #bd4128 100%);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
-.location-detail strong {
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 0.2rem;
+.gallery-sage {
+  background: linear-gradient(152deg, #bfdfcb 0%, #8fbfa4 100%);
+  border: 1px solid rgba(248, 245, 239, 0.16);
+  color: var(--i-tinta);
 }
 
-.location-detail p {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-  line-height: 1.55;
+.gallery-sage:hover {
+  background: linear-gradient(152deg, #c9e7d4 0%, #99c9ad 100%);
+  border-color: rgba(248, 245, 239, 0.3);
 }
 
-.location-info .button-primary {
-  margin-top: auto;
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+/* Cada pieza rotula con la tinta que le corresponde. */
+.gallery-dark .gallery-label {
+  color: var(--i-crema);
 }
 
-.location-info .button-primary svg {
-  width: 1rem;
-  height: 1rem;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.gallery-light .gallery-label,
+.gallery-sage .gallery-label {
+  color: var(--i-tinta);
 }
 
-/* Mapa embed */
-.location-map {
-  position: relative;
-  min-height: 420px;
-  overflow: hidden;
+.gallery-item .gallery-label span {
+  opacity: 0.66;
 }
 
-.location-map iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+.gallery-coral .gallery-quote {
+  color: #ffffff;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .location-card {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
+.gallery-art-one::before {
+  border-color: rgba(248, 245, 239, 0.16);
+}
 
-  .location-info {
-    padding: 2rem 1.5rem;
-  }
+/* ==================================================
+   LLAMADA FINAL
+   ================================================== */
 
-  .location-map {
-    min-height: 280px;
-  }
+.cta-box {
+  background:
+    radial-gradient(640px 440px at 88% 10%, rgba(255, 138, 107, 0.22), transparent 66%),
+    linear-gradient(135deg, #1f463c 0%, #102823 60%, #1a3a32 100%);
+  border: 1px solid rgba(248, 245, 239, 0.12);
+  box-shadow: 0 36px 80px rgba(0, 0, 0, 0.38);
+  color: var(--i-crema);
+}
+
+.cta-copy .section-kicker-light {
+  color: var(--i-ambar);
+}
+
+.cta-copy h2 {
+  color: var(--i-crema);
+}
+
+.cta-copy p {
+  color: rgba(248, 245, 239, 0.74);
+}
+
+.cta-box .button-light {
+  background: var(--i-crema);
+  color: var(--i-tinta);
+}
+
+.cta-box .button-light:hover {
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
