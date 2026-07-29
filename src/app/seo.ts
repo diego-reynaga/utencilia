@@ -24,7 +24,10 @@ export class Seo {
   private readonly document = inject(DOCUMENT);
 
   aplicar({ title, description, path, keywords }: SeoData): void {
-    const url = `${SITE_URL}${path}`;
+    // Appwrite redirige /inicio -> /inicio/ con un 301 antes de que corra el
+    // worker. Si el canónico apuntara a la URL sin barra, Google vería que la
+    // página canónica redirige a otra y fallaría con "Error de redirección".
+    const url = `${SITE_URL}${path}/`;
 
     this.title.setTitle(title);
 

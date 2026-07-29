@@ -71,7 +71,9 @@ export default {
 
     const url = new URL(request.url);
 
-    // Sin la barra final las URLs quedarían duplicadas para Google.
+    // Appwrite ya redirige /inicio -> /inicio/ antes de llegar aquí, así que
+    // ambas formas deben resolver a la misma página: se quita la barra final
+    // sólo para buscar en PAGINAS, sin redirigir de nuevo.
     const ruta = url.pathname.length > 1 && url.pathname.endsWith('/')
       ? url.pathname.slice(0, -1)
       : url.pathname;

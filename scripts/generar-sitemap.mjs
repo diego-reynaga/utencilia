@@ -14,9 +14,11 @@ const RUTAS = [
 
 const hoy = new Date().toISOString().split('T')[0];
 
+// La barra final es obligatoria: Appwrite redirige /inicio -> /inicio/, y el
+// sitemap debe listar la URL final para que coincida con el canónico.
 const urls = RUTAS.map(
   ({ ruta, prioridad, frecuencia }) => `  <url>
-    <loc>${SITE_URL}${ruta}</loc>
+    <loc>${SITE_URL}${ruta}/</loc>
     <lastmod>${hoy}</lastmod>
     <changefreq>${frecuencia}</changefreq>
     <priority>${prioridad}</priority>
