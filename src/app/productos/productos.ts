@@ -15,7 +15,7 @@ import { Modelo3d } from './modelo3d/modelo3d';
 import { Ilustracion } from './ilustracion/ilustracion';
 import { ClaveFigura } from './ilustracion/figuras';
 
-const WHATSAPP = 'https://wa.me/51999999999';
+const WHATSAPP = 'https://wa.me/51938381149';
 
 export interface Producto {
   id: number;

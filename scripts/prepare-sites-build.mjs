@@ -5,13 +5,28 @@ const projectRoot = process.cwd();
 const angularBrowserOutput = join(projectRoot, 'dist', 'utensilia', 'browser');
 const distRoot = join(projectRoot, 'dist');
 const serverDir = join(distRoot, 'server');
-const indexHtml = await readFile(join(angularBrowserOutput, 'index.html'), 'utf8');
+
+/** Rutas prerenderizadas: cada una tiene su propio HTML con meta tags y contenido. */
+const RUTAS_PRERENDERIZADAS = ['inicio', 'categorias', 'productos', 'beneficios', 'contacto'];
 
 await rm(serverDir, { recursive: true, force: true });
 await cp(angularBrowserOutput, distRoot, { recursive: true });
 await mkdir(serverDir, { recursive: true });
 
-const worker = `const INDEX_HTML = ${JSON.stringify(indexHtml)};
+// El worker embebe el HTML de cada ruta para responder sin tocar el disco.
+const paginas = {};
+for (const ruta of RUTAS_PRERENDERIZADAS) {
+  paginas[`/${ruta}`] = await readFile(join(angularBrowserOutput, ruta, 'index.html'), 'utf8');
+}
+
+// El index.html de la raíz sólo contiene el redirect del router ("Redirecting"),
+// sin contenido ni meta tags: servirlo dejaría la home vacía para los crawlers.
+// Por eso la raíz responde con el HTML completo de /inicio.
+const indexHtml = await readFile(join(angularBrowserOutput, 'index.html'), 'utf8');
+paginas['/'] = paginas['/inicio'] ?? indexHtml;
+
+const worker = `const PAGINAS = ${JSON.stringify(paginas)};
+const NO_ENCONTRADA = ${JSON.stringify(paginas['/inicio'] ?? indexHtml)};
 
 const SECURITY_HEADERS = {
   'x-content-type-options': 'nosniff',
@@ -34,7 +49,7 @@ function withHeaders(response, cacheControl) {
   });
 }
 
-function htmlResponse() {
+function htmlResponse(html, status = 200) {
   const headers = new Headers({
     'content-type': 'text/html; charset=utf-8',
     'cache-control': DOCUMENT_CACHE_CONTROL
@@ -42,7 +57,7 @@ function htmlResponse() {
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     headers.set(key, value);
   }
-  return new Response(INDEX_HTML, { headers });
+  return new Response(html, { status, headers });
 }
 
 export default {
@@ -55,17 +70,33 @@ export default {
     }
 
     const url = new URL(request.url);
+
+    // Sin la barra final las URLs quedarían duplicadas para Google.
+    const ruta = url.pathname.length > 1 && url.pathname.endsWith('/')
+      ? url.pathname.slice(0, -1)
+      : url.pathname;
+
+    // Cada ruta prerenderizada se sirve con su propio HTML, no con el de inicio:
+    // de lo contrario los crawlers verían siempre los mismos meta tags.
+    const pagina = PAGINAS[ruta];
+    if (pagina) {
+      return htmlResponse(pagina);
+    }
+
     const assetResponse = await env.ASSETS.fetch(new Request(url, request));
     if (assetResponse.status !== 404) {
-      const cacheControl = url.pathname === '/' || url.pathname.endsWith('.html')
+      const cacheControl = ruta === '/' || ruta.endsWith('.html')
         ? DOCUMENT_CACHE_CONTROL
         : ASSET_CACHE_CONTROL;
       return withHeaders(assetResponse, cacheControl);
     }
 
-    return htmlResponse();
+    // 404 real para que Google no indexe rutas inexistentes como si fueran válidas.
+    return htmlResponse(NO_ENCONTRADA, 404);
   }
 };
 `;
 
 await writeFile(join(serverDir, 'index.js'), worker);
+
+console.log(`Worker generado con ${Object.keys(paginas).length} páginas prerenderizadas.`);

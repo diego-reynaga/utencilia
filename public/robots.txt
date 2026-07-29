@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://corporacionmendoza.appwrite.network/sitemap.xml
