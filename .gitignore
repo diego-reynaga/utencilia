@@ -3,7 +3,6 @@
 
 .claude
 .openai
-drift
 
 # Compiled output
 /dist
